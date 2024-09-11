@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../styles/HelloTask.module.css'; // Adjust the path as necessary
+import styles from '../styles/HelloTask.module.css'; 
 
 interface HelloTaskProps {
   count: number;
@@ -10,6 +10,7 @@ const HelloTask: React.FC<HelloTaskProps> = ({ count }) => {
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
   useEffect(() => {
+    // Reset messages if count is 0
     if (count <= 0) {
       setMessages([]);
       setIsRunning(false);
@@ -17,11 +18,12 @@ const HelloTask: React.FC<HelloTaskProps> = ({ count }) => {
     }
 
     const printHello = (n: number): string[] => {
-      if (n <= 0) return ['STOP'];
+      if (n <= 0) return [];
       return [...printHello(n - 1), 'Hello Task'];
     };
 
-    const helloMessages = printHello(count);
+    // Create the message list with 'STOP' appended at the end
+    const helloMessages = [...printHello(count), 'STOP'];
     let index = 0;
 
     if (!isRunning) {
@@ -35,7 +37,7 @@ const HelloTask: React.FC<HelloTaskProps> = ({ count }) => {
           clearInterval(interval);
           setIsRunning(false);
         }
-      }, 1000);
+      }, 1000); // Adjust interval if needed
 
       return () => clearInterval(interval);
     }

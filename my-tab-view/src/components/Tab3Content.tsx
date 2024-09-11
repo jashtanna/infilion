@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import HelloTask from './HelloTask';
 import UserCard from './UserCard';
-import styles from '../styles/Tab3Content.module.css'; 
+import styles from '../styles/Tab3Content.module.css';
+
 interface Tab3ContentProps {
   data: {
     id: number;
@@ -13,34 +14,33 @@ interface Tab3ContentProps {
 }
 
 const Tab3Content: React.FC<Tab3ContentProps> = ({ data }) => {
-  const [number, setNumber] = useState<number>(0);
+  const [number, setNumber] = useState<number | ''>(0); // Allow initial state to be '' for clearer handling
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNumber(Number(e.target.value));
+    const value = e.target.value;
+    setNumber(value ? Number(value) : ''); // Handle empty string case
   };
 
   return (
     <div className={styles.tab3Container}>
-      {/* Hello Task Section */}
       <div className={styles.helloTaskSection}>
         <h3>Hello Task</h3>
         <form>
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="numberInput">Enter a number:</label>
             <input
               type="number"
               id="numberInput"
-              className="form-control"
-              value={number}
+              className={styles.formControl}
+              value={number === '' ? '' : number} 
               onChange={handleChange}
               placeholder="Enter a number"
               min="1"
             />
           </div>
         </form>
-        <HelloTask count={number} />
+        <HelloTask count={typeof number === 'number' && number > 0 ? number : 0} />
       </div>
-      {/* API Data Section */}
       <div className={styles.apiDataSection}>
         <h2>Data from API:</h2>
         <div className={styles.userCards}>
