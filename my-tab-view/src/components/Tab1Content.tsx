@@ -1,13 +1,16 @@
 import React from 'react';
+import styles from '../styles/Tab1Content.module.css'; 
 
 const Tab1Content: React.FC = () => {
+  const handleButtonClick = () => {
+    window.open('https://www.google.com', '_blank');
+  };
+
   return (
-    <div>
-      <iframe
-        src="https://www.google.com"
-        title="Google"
-        style={{ width: '100%', height: '500px', border: 'none' }}
-      ></iframe>
+    <div className={styles.container}>
+      <button className={styles.button} onClick={handleButtonClick}>
+        Go to Google
+      </button>
     </div>
   );
 };

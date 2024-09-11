@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import HelloTask from './HelloTask';
 import UserCard from './UserCard';
-
+import styles from '../styles/Tab3Content.module.css'; 
 interface Tab3ContentProps {
   data: {
     id: number;
@@ -20,9 +20,9 @@ const Tab3Content: React.FC<Tab3ContentProps> = ({ data }) => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className={styles.tab3Container}>
       {/* Hello Task Section */}
-      <div className="mb-4">
+      <div className={styles.helloTaskSection}>
         <h3>Hello Task</h3>
         <form>
           <div className="form-group">
@@ -40,17 +40,18 @@ const Tab3Content: React.FC<Tab3ContentProps> = ({ data }) => {
         </form>
         <HelloTask count={number} />
       </div>
-      <div>
+      {/* API Data Section */}
+      <div className={styles.apiDataSection}>
         <h2>Data from API:</h2>
-        <div className="row">
+        <div className={styles.userCards}>
           {data.length > 0 ? (
             data.map((user) => (
-              <div className="col-sm-12 col-md-6 col-lg-4 mb-4" key={user.id}>
+              <div className={styles.userCard} key={user.id}>
                 <UserCard user={user} />
               </div>
             ))
           ) : (
-            <p>No data available.</p>
+            <p className={styles.noData}>No data available.</p>
           )}
         </div>
       </div>
