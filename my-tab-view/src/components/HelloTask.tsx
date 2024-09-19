@@ -22,7 +22,6 @@ const HelloTask: React.FC<HelloTaskProps> = ({ count }) => {
       return [...printHello(n - 1), 'Hello Task'];
     };
 
-    // Create the message list with 'STOP' appended at the end
     const helloMessages = [...printHello(count), 'STOP'];
     let index = 0;
 
@@ -37,7 +36,7 @@ const HelloTask: React.FC<HelloTaskProps> = ({ count }) => {
           clearInterval(interval);
           setIsRunning(false);
         }
-      }, 1000); // Adjust interval if needed
+      }, 100); 
 
       return () => clearInterval(interval);
     }
